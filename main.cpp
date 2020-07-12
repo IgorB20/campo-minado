@@ -1,6 +1,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#include <cstdlib>
 
 using namespace std;
 
@@ -8,9 +9,6 @@ using namespace std;
 void showField(int linhas, int colunas){
     //- = campo vazio
     //x = bomba
-
-    char linhas_letters[26] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
-    char colunas_indices[26] = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
 
     cout << "Campo: " << endl;
     for(int i=0;i<linhas;i++){
@@ -24,19 +22,53 @@ void showField(int linhas, int colunas){
 
 
 int main(){
-  int i,j,bomb,bomb2;
+  int linhas,colunas,bombs;
+  srand(time(NULL));
+  //cout << rand()%10+1 << endl;
 
-  while(i<=1 || j<=1){
-  cout<<"Insira o numero de linhas e colunas"<<endl;
-  cin>>i>>j; //entrada de linhas e colunas
+  while(linhas<=1 || colunas<=1){
+      cout<<"Insira o numero de linhas e colunas"<<endl;
+      cin>>linhas>>colunas; //entrada de linhas e colunas
   }
-  if (i>=2 && j>=2){
-    while(bomb<2){ //entrada de bombas
+
+  if (linhas>=2 && colunas>=2){
+    while(bombs<2){ //entrada de bombas
         cout<<"Insira o numero de bombas"<<endl;
-        cin>>bomb;
+        cin>>bombs;
     }
+  }
+
+    char field[linhas][colunas];
+    int bombs_positions[linhas][colunas];
+
+    //GERAR O CAMPO
+     for(int i=0;i<linhas;i++){
+        for(int j=0;j<colunas;j++){
+            field[i][j] = '-';
+            bombs_positions[i][j] = 0;
+            cout << field[i][j] << " ";
+        }
+        cout << endl;
     }
 
+    //GERAR BOMBAS ALEATORIAS
+    for(int i=0;i<bombs;i++){
+        int random_row, random_col;
+
+        random_row = rand()%linhas+1;
+        random_col = rand()%colunas+1;
+
+        //verificar se no campo já nao possui uma bomba nessas coordenadas
+        while(bombs_positions[random_row][random_col] == 1){
+            random_row = rand()%linhas+1;
+            random_col = rand()%colunas+1;
+        }
+
+        bombs_positions[random_row][random_col] = 1;
+    }
+
+ return 0;
+
   }
- showField(i, j);
-}
+
+
