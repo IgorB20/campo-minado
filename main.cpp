@@ -5,22 +5,6 @@
 
 using namespace std;
 
-//mostra o campo do jogo na tela
-void showField(int linhas, int colunas){
-    //- = campo vazio
-    //x = bomba
-
-    cout << "Campo: " << endl;
-    for(int i=0;i<linhas;i++){
-        for(int j=0;j<colunas;j++){
-            cout << "- ";
-        }
-        cout << endl;
-    }
-}
-
-
-
 int main(){
   int linhas,colunas,bombs,jogadas,x,y,flag=0;
   bool endGame = false;
