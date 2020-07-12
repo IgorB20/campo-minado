@@ -67,14 +67,6 @@ int main(){
         bombs_positions[random_row][random_col] = 'x';
     }
 
-       for(int i=0;i<linhas;i++){
-        for(int j=0;j<colunas;j++){
-
-            cout << bombs_positions[i][j] << " ";
-        }
-        cout << endl;
-    }
-
 
  return 0;
 
