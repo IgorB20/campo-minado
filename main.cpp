@@ -22,22 +22,20 @@ void showField(int linhas, int colunas){
 
 
 int main(){
-  int linhas,colunas,bombs;
+  int linhas,colunas,bombs,jogadas,x,y,flag=0;
   srand(time(NULL));
   //cout << rand()%10+1 << endl;
 
   while(linhas<=1 || colunas<=1){
       cout<<"Insira o numero de linhas e colunas"<<endl;
       cin>>linhas>>colunas; //entrada de linhas e colunas
-  }
-
   if (linhas>=2 && colunas>=2){
-    while(bombs<2){ //entrada de bombas
+        while(bombs<2){
         cout<<"Insira o numero de bombas"<<endl;
         cin>>bombs;
+        }
     }
   }
-
     char field[linhas][colunas];
     char bombs_positions[linhas][colunas];
 
@@ -58,7 +56,7 @@ int main(){
         random_row = rand()%linhas+1;
         random_col = rand()%colunas+1;
 
-        //verificar se no campo j� nao possui uma bomba nessas coordenadas
+        //verificar se no campo já nao possui uma bomba nessas coordenadas
         while(bombs_positions[random_row][random_col] == 'x'){
             random_row = rand()%linhas+1;
             random_col = rand()%colunas+1;
@@ -67,9 +65,25 @@ int main(){
         bombs_positions[random_row][random_col] = 'x';
     }
 
+       for(int i=0;i<linhas;i++){
+        for(int j=0;j<colunas;j++){
 
- return 0;
-
+            cout << bombs_positions[i][j] << " ";
+        }
+        cout << endl;
+    }
+    for(jogadas=1;jogadas<4;jogadas++){
+    do{
+    cout<<"Insira as linhas e colunas que voce vai jogar"<<endl;
+    cin>>x>>y;
+    }while((x<0||x>linhas)||(y<0||y>colunas));
+    if(bombs_positions[x][y]=='x'){/* condição se marcar o espaço que está a mina, o jogo acaba */
+           cout<<"Errou"<<endl;
+            break;
+    }
+    else if (bombs_positions[x][y]==!"x"){
+      cout<<"Acertou!"<<endl;
+    }
   }
-
-
+  return 0;
+}
