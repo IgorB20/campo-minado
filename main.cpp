@@ -39,13 +39,13 @@ int main(){
   }
 
     char field[linhas][colunas];
-    int bombs_positions[linhas][colunas];
+    char bombs_positions[linhas][colunas];
 
     //GERAR O CAMPO
      for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             field[i][j] = '-';
-            bombs_positions[i][j] = 0;
+            bombs_positions[i][j] = '0';
             cout << field[i][j] << " ";
         }
         cout << endl;
@@ -59,13 +59,22 @@ int main(){
         random_col = rand()%colunas+1;
 
         //verificar se no campo já nao possui uma bomba nessas coordenadas
-        while(bombs_positions[random_row][random_col] == 1){
+        while(bombs_positions[random_row][random_col] == 'x'){
             random_row = rand()%linhas+1;
             random_col = rand()%colunas+1;
         }
 
-        bombs_positions[random_row][random_col] = 1;
+        bombs_positions[random_row][random_col] = 'x';
     }
+
+       for(int i=0;i<linhas;i++){
+        for(int j=0;j<colunas;j++){
+
+            cout << bombs_positions[i][j] << " ";
+        }
+        cout << endl;
+    }
+
 
  return 0;
 
