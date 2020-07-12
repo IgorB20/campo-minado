@@ -26,17 +26,15 @@ void showField(int linhas, int colunas){
 int main(){
   int i,j,bomb,bomb2;
 
-  cout<<"Insira o numero de linhas"<<endl;
-  cin>>i;
-  cout<<"Insira o numero de colunas"<<endl;
-  cin>>j;
-  if (i==2&&j==2){
-    bomb=2;
-  }else if (i>2 && j>2){
-    while(bomb>2){
+  while(i<=1 || j<=1){
+  cout<<"Insira o numero de linhas e colunas"<<endl;
+  cin>>i>>j; //entrada de linhas e colunas
+  }
+  if (i>=2 && j>=2){
+    while(bomb<2){ //entrada de bombas
         cout<<"Insira o numero de bombas"<<endl;
-        cin>>bomb2;
-        bomb=bomb+bomb2;
+        cin>>bomb;
+    }
     }
 
   }
