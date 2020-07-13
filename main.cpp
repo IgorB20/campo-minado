@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-  int linhas,colunas,bombs,x,y;
+  int linhas,colunas,bombs,jogadas,x,y;
   bool endGame = false;
   srand(time(NULL));
   //cout << rand()%10+1 << endl;
@@ -27,15 +27,11 @@ int main(){
      for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             field[i][j] = '-';
-            if(bombs_positions[i][j]== '1'){
-              bombs_positions[i][j]='1';
-            }else{
               bombs_positions[i][j] = '0';
-            }
             cout << field[i][j] << " ";
-        }
-        cout << endl;
-    }
+         }
+         cout << endl;
+     }
 
     //GERAR BOMBAS ALEATORIAS
     for(int i=0;i<bombs;i++){
@@ -51,22 +47,30 @@ int main(){
         }
 
         bombs_positions[random_row][random_col] = 'x';
-          for(int i=random_row;i>random_row;i++){
-            for(int j=random_col;j>random_col;j++)
-            bombs_positions[random_row][random_col]='1';
+          {if(bombs_positions[random_row][random_col]=='x'){
+              random_row=random_row-1;
+            }
+            bombs_positions[random_row][random_col] = '1';
+            }
+          {if(bombs_positions[random_row][random_col]=='x'){
+              random_row=random_row+1;
+            }
+            bombs_positions[random_row][random_col] = '1';
           }
-          for(int i=random_row;i<random_row;i--){
-            for(int j=random_col;j<random_col;j--)
-            bombs_positions[random_row][random_col]='1';
+          {if(bombs_positions[random_row][random_col]=='x'){
+              random_col=random_col-1;
+            }
+            bombs_positions[random_row][random_col] = '1';
           }
+          {if(bombs_positions[random_row][random_col]=='x'){
+              random_col=random_col+1;
+            }
+            bombs_positions[random_row][random_col] = '1';
+           }
     }
-
-
        for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
-            if (bombs_positions[i][j]!='1'){
             cout << bombs_positions[i][j] << " ";
-            }
           }
         cout << endl;
         }
