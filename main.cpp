@@ -51,6 +51,7 @@ int main(){
         }
 
         bombs_positions[random_row][random_col] = 'x';
+
           for(int i=random_row;i>random_row;i++){
             for(int j=random_col;j>random_col;j++)
             bombs_positions[random_row][random_col]='1';
