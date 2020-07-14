@@ -63,7 +63,6 @@ int main(){
                 /*
                 Nas linhas abaixo ocorre a contagem das bombas ao redor de cada coordenada,
                 como no exemplo:
-
                     |x|x|x|
                     |x|o|x|
                     |x|x|x|
@@ -99,7 +98,7 @@ int main(){
     do{
         cout<<"Insira as linhas e colunas que voce vai jogar"<<endl;
         cin>>x>>y;
-
+        jogadas++;
         field[x][y] = bombs_positions[x][y];
 
         //MOSTRAR CAMPO
@@ -112,12 +111,10 @@ int main(){
 
         if(bombs_positions[x][y] == 'x'){
             endGame = true;
-            cout << "PERDEU!" << endl;
+            cout << "PERDEU!" << "com jogadas: " << jogadas<<endl;
             break;
         }
     }while(!endGame);
 
   return 0;
 }
-
-
