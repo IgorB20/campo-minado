@@ -32,7 +32,7 @@ int main(){
      for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             field[i][j] = '-';
-              bombs_positions[i][j] = '0';
+            bombs_positions[i][j] = '0';
             cout << field[i][j] << " ";
          }
          cout << endl;
@@ -54,36 +54,39 @@ int main(){
         bombs_positions[random_row][random_col] = 'x';
     }
 
-     for(int i=0;i<linhas;i++){
-        for(int j=0;j<colunas;j++){
-            cout << bombs_positions[i][j] << " ";
-          }
-        cout << endl;
-        }
-        cout << endl;
-
     //informar a quntidade de bombas ao redor de cada coordenada
     int currentCoordinateBombAmount = 0;
 
      for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             if(bombs_positions[i][j] != 'x'){
-                if( bombs_positions[i-1][j-1] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i][j-1] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i+1][j-1] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i-1][j] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i+1][j] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i-1][j+1] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i][j+1] == 'x') currentCoordinateBombAmount++;
-                if( bombs_positions[i+1][j+1] == 'x') currentCoordinateBombAmount++;
-                bombs_positions[i][j] = currentCoordinateBombAmount + '0';
+                /*
+                Nas linhas abaixo ocorre a contagem das bombas ao redor de cada coordenada,
+                como no exemplo:
+
+                    |x|x|x|
+                    |x|o|x|
+                    |x|x|x|
+                */
+                if( i>0 && j>0 && bombs_positions[i-1][j-1] == 'x')currentCoordinateBombAmount++;
+                if( j>0 && bombs_positions[i][j-1] == 'x') currentCoordinateBombAmount++;
+                if( i < (linhas - 1)&& j > 0 && bombs_positions[i+1][j-1] == 'x') currentCoordinateBombAmount++;
+                if( i > 0 && bombs_positions[i-1][j] == 'x') currentCoordinateBombAmount++;
+                if( i < (linhas-1) && bombs_positions[i+1][j] == 'x') currentCoordinateBombAmount++;
+                if( i > 0 && j < (colunas -1) && bombs_positions[i-1][j+1] == 'x') currentCoordinateBombAmount++;
+                if( j < (colunas - 1) && bombs_positions[i][j+1] == 'x') currentCoordinateBombAmount++;
+                if( i < (linhas -1) && j < (colunas -1) && bombs_positions[i+1][j+1] == 'x') currentCoordinateBombAmount++;
+
+                bombs_positions[i][j] = currentCoordinateBombAmount + '0';//"conversão" de int para pra char
                 currentCoordinateBombAmount = 0;
+
             }
+
 
         }
     }
 
-    //mostrar campo com o mapemaneto das bombas
+    //mostrar campo com o mapeamento das bombas
        for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             cout << bombs_positions[i][j] << " ";
