@@ -6,9 +6,13 @@
 using namespace std;
 
 int main(){
-  int linhas,colunas,bombs,x,y;
+  int linhas,colunas,bombs,jogadas,x,y;
   bool endGame = false;
   srand(time(NULL));
+
+  int t = 2;
+  char r = t+'0';
+  cout << r << endl;
   //cout << rand()%10+1 << endl;
 
   while(linhas<=1 || colunas<=1){
@@ -23,19 +27,16 @@ int main(){
   }
     char field[linhas][colunas];
     char bombs_positions[linhas][colunas];
+
     //GERAR O CAMPO
      for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
             field[i][j] = '-';
-            if(bombs_positions[i][j]== '1'){
-              bombs_positions[i][j]='1';
-            }else{
               bombs_positions[i][j] = '0';
-            }
             cout << field[i][j] << " ";
-        }
-        cout << endl;
-    }
+         }
+         cout << endl;
+     }
 
     //GERAR BOMBAS ALEATORIAS
     for(int i=0;i<bombs;i++){
@@ -51,26 +52,47 @@ int main(){
         }
 
         bombs_positions[random_row][random_col] = 'x';
-
-          for(int i=random_row;i>random_row;i++){
-            for(int j=random_col;j>random_col;j++)
-            bombs_positions[random_row][random_col]='1';
-          }
-          for(int i=random_row;i<random_row;i--){
-            for(int j=random_col;j<random_col;j--)
-            bombs_positions[random_row][random_col]='1';
-          }
     }
 
-
-       for(int i=0;i<linhas;i++){
+     for(int i=0;i<linhas;i++){
         for(int j=0;j<colunas;j++){
-            if (bombs_positions[i][j]!='1'){
             cout << bombs_positions[i][j] << " ";
-            }
           }
         cout << endl;
         }
+        cout << endl;
+
+    //informar a quntidade de bombas ao redor de cada coordenada
+    int currentCoordinateBombAmount = 0;
+
+     for(int i=0;i<linhas;i++){
+        for(int j=0;j<colunas;j++){
+            if(bombs_positions[i][j] != 'x'){
+                if( bombs_positions[i-1][j-1] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i][j-1] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i+1][j-1] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i-1][j] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i+1][j] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i-1][j+1] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i][j+1] == 'x') currentCoordinateBombAmount++;
+                if( bombs_positions[i+1][j+1] == 'x') currentCoordinateBombAmount++;
+                bombs_positions[i][j] = currentCoordinateBombAmount + '0';
+                currentCoordinateBombAmount = 0;
+            }
+
+        }
+    }
+
+    //mostrar campo com o mapemaneto das bombas
+       for(int i=0;i<linhas;i++){
+        for(int j=0;j<colunas;j++){
+            cout << bombs_positions[i][j] << " ";
+          }
+        cout << endl;
+        }
+
+        //cout << bombs_positions[-1][0] << endl;
+
     do{
         cout<<"Insira as linhas e colunas que voce vai jogar"<<endl;
         cin>>x>>y;
