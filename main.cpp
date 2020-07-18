@@ -13,18 +13,17 @@ int main()
 
     int t = 2;
     char r = t+'0';
-    cout << r << endl;
-    //cout << rand()%10+1 << endl;
 
     while(linhas<=1 || colunas<=1)
     {
         cout<<"Insira o numero de linhas e colunas"<<endl;
-        cin>>linhas>>colunas; //entrada de linhas e colunas
+        cin>>linhas>>colunas; 
+        //entrada de linhas e colunas
         if (linhas>=2 && colunas>=2)
         {
-            while(bombs<2)
+            while(bombs<2) //mínimo de tamanho e de bombas
             {
-                cout<<"Insira o numero de bombas"<<endl;
+                cout<<"Insira o numero de bombas"<<endl; //entrada de número de bombas
                 cin>>bombs;
             }
         }
@@ -54,7 +53,7 @@ int main()
         cout << endl;
     }
 
-    //GERAR BOMBAS ALEATORIAS
+    //gerar posições de bombas aleatórias
     for(int i=0; i<bombs; i++)
     {
         int random_row, random_col;
@@ -62,7 +61,7 @@ int main()
         random_row = rand()%linhas;
         random_col = rand()%colunas;
 
-        //verificar se no campo já nao possui uma bomba nessas coordenadas
+        //verificar se no campo já não possui uma bomba nessas coordenadas
         while(bombs_positions[random_row][random_col] == 'x')
         {
             random_row = rand()%linhas;
@@ -72,7 +71,7 @@ int main()
         bombs_positions[random_row][random_col] = 'x';
     }
 
-    //informar a quntidade de bombas ao redor de cada coordenada
+    //informar a quantidade de bombas ao redor de cada coordenada
     int currentCoordinateBombAmount = 0;
 
     for(int i=0; i<linhas; i++)
@@ -105,27 +104,14 @@ int main()
 
         }
     }
-
-    //mostrar campo com o mapeamento das bombas
-    /* for(int i=0; i<linhas; i++)
-     {
-         for(int j=0; j<colunas; j++)
-         {
-             cout << bombs_positions[i][j] << " ";
-         }
-         cout << endl;
-     }*/
-
-    //cout << bombs_positions[-1][0] << endl;
-
     do
     {
         cout<<"Insira as linhas e colunas que voce vai jogar"<<endl;
-        cin>>x>>y;
-        jogadas++;
-        field[x][y] = bombs_positions[x][y];
+        cin>>x>>y; //entrada das coordenadas das jogadas
+        jogadas++; //contador de jogadas
+        field[x][y] = bombs_positions[x][y]; //posições da tela do jogador e tela das bombas
 
-        //MOSTRAR CAMPO
+        //MOSTRAR CAMPO DO JOGADOR
         cout << "  ";
         for(int j=0; j<colunas; j++)
         {
@@ -150,7 +136,6 @@ int main()
         {
             endGame = true;
             cout << "PERDEU!" << endl << "Jogadas: " << jogadas<<endl;
-            //break;
         }
 
         //CONFERIR VITÓRIA
@@ -158,7 +143,6 @@ int main()
         {
             endGame = true;
             cout << "GANHOU!" << endl << "Jogadas: " << jogadas<<endl;
-            //break;
         }
 
         //MOSTRAR CAMPO REVELADO
